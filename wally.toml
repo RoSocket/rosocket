@@ -1,0 +1,10 @@
+[package]
+name = "RoSocket/rosocket"
+description = "Roblox websocket support in 1 module"
+version = "1.0.0"
+license = "MIT"
+authors = ["sturmgeisty"]
+registry = "https://github.com/upliftgames/wally-index"
+realm = "shared"
+include = ["src", "src/**", "wally.toml", "wally.lock", "default.project.json"]
+exclude = ["**"]

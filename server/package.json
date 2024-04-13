@@ -1,0 +1,20 @@
+{
+  "name": "rosocket-server",
+  "version": "1.0.0",
+  "description": "Node backend server for RoSocket.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo Hello World!"
+  },
+  "keywords": [
+    "server",
+    "node.js server",
+    "rosocket"
+  ],
+  "author": "sturmgeisty",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.16.0"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "RoSocket",
+  "className": "ModuleScript",
+  "filePaths": [
+    "src\\init.lua",
+    "default.project.json"
+  ],
+  "children": [
+    {
+      "name": "Reader",
+      "className": "ModuleScript",
+      "filePaths": [
+        "src\\reader\\init.lua"
+      ],
+      "children": [
+        {
+          "name": "Dictionary",
+          "className": "ModuleScript",
+          "filePaths": [
+            "src\\reader\\Dictionary.lua"
+          ]
+        },
+        {
+          "name": "Errors",
+          "className": "ModuleScript",
+          "filePaths": [
+            "src\\reader\\Errors.lua"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Maid",
+      "className": "ModuleScript",
+      "filePaths": [
+        "src\\Maid.lua"
+      ]
+    },
+    {
+      "name": "Signal",
+      "className": "ModuleScript",
+      "filePaths": [
+        "src\\Signal.lua"
+      ]
+    },
+    {
+      "name": "Signature",
+      "className": "ModuleScript",
+      "filePaths": [
+        "src\\Signature.lua"
+      ]
+    }
+  ]
+}
