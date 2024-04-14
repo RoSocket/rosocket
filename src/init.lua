@@ -42,10 +42,9 @@ end
 local MaidSocket = Maid.new()
 local Sockets = {}
 RoSocket.Version = "1.0.0"
-RoSocket.Connect = function(...) 
-	local socket = select(1, ...)
+RoSocket.Connect = function(socket: string): (any?) -> (table)
 	local validsocket = true
-	
+
 	if validsocket ~= false then
 		local data = Reader:Connect(socket)
 		if data.success ~= false then
@@ -68,11 +67,11 @@ RoSocket.Connect = function(...)
 			tbl.OnMessageReceived = OnMessageReceived
 			local OnErrorReceived : RBXScriptSignal = Signal.new()
 			tbl.OnErrorReceived = OnErrorReceived
-			
+
 			local elapsedTimer = Sockets[uuid] and Sockets[uuid].elapsedtimer or 0
-			
+
 			MaidSocket[uuid] = RunService.Heartbeat:Connect(function(deltaTime)
-				
+
 				if elapsedTimer >= SOCKET_SERVER_UPDATES then
 					elapsedTimer = 0
 				end
@@ -130,11 +129,11 @@ RoSocket.Connect = function(...)
 							end
 						end
 					else
-						
+
 					end
 				end
 			end)
-			
+
 			tbl.UUID = uuid
 			tbl.Socket = data.Socket
 			tbl.Disconnect = function(...)
@@ -156,7 +155,7 @@ RoSocket.Connect = function(...)
 			end
 			tbl.Messages = localmsgs and localmsgs or {}
 			tbl.Errors = localerrors and localerrors or {}
-			
+
 			setmetatable(tbl, {
 				__call = function(self, index, ...) 
 					return tbl[index](...)
@@ -169,7 +168,7 @@ RoSocket.Connect = function(...)
 				errors = {},
 				elapsedtimer = 0
 			}
-			
+
 			return tbl
 		end
 	else
