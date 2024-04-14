@@ -19,7 +19,7 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 -----------------------------------------------
-local SOCKET_SERVER_UPDATES = 0.15
+local SOCKET_SERVER_UPDATES = 0.15 -- Decrease this decimal to achieve even faster speeds. Minimum is 0.02, anything below will temporarly ratelimit the current game server. I recommend it around 0.10-0.15!
 -----------------------------------------------
 export type RequestResponse<T> = {
 	Success: boolean?,
