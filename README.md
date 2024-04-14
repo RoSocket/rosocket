@@ -20,6 +20,8 @@ Download from [Releases](https://github.com/RoSocket/rosocket/releases)
 
 ## API
 
+If you want faster replies, then navigate to the **reader module** > **SOCKET_SERVER_UPDATES**, set it to 0.10 or less, minimum is 0.02 before ratelimits start to appear.
+
 **Functions:**
 
 ```Lua
@@ -44,7 +46,7 @@ object socket.Errors
 **Keys:**
 
 ```Lua
-Version: "1.0.0"
+string RoSocket.Version: string?
 ```
 
 ## Simple Example
