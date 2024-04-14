@@ -35,8 +35,7 @@ if RunService:IsServer() == false then
 	error(Reader:FormatText(Errors.INVALID_REQUIREMENT_CONTEXT))
 end
 -- Http check
-local IsEnabled = game:GetService("HttpService").HttpEnabled
-if IsEnabled == false then
+if not HttpService.HttpEnabled then
 	error(Reader:FormatText(Errors.HTTP_SERVICE_DISABLED))
 end
 -----------------------------------------------
