@@ -1,8 +1,17 @@
-
-# RoSocket
-
-Roblox websocket support made possible thru a server and a roblox module.
-Http requests must be enabled for this to work. To enable them, make sure your game is published, then head over to the topbar > **FILE** > **Game Settings** > **Security** > _Allow HTTP Requests_. If you want to self-host the server source on a server of your choice, then after build is successfull (or just manually grab the RBXM), find the **"Reader"** module which is a descendant of RoSocket module, and change "SOCKET_SERVER_URL" to the URL of your server.
+<p align="center">
+  <img width="600" src="https://github.com/RoSocket/rosocket/assets/130825965/f795c24e-dcf0-4fe3-b482-98fe7809e923">
+  <br>
+  <code>RoSocket</code> is a Roblox module to emulate a websocket library.<br>
+  Http requests must be enabled for the module to work.<br>
+  To enable them, head over to the topbar > <b>FILE</b> > <b>Game Settings</b> > <b>Security</b> > <b>Allow HTTP Requests</b>.<br>
+  If you are self-hosting, then navigate to the <b>"Reader"</b> module and change "SOCKET_SERVER_URL" to the URL of your server.
+</p>
+<br>
+<p align="center">
+  <a href="#api">API documentation</a> •
+  <a href="#simple-example">Examples</a> •
+  <a href="#self-hosting-the-server">Self-hosting</a>
+</p>
 
 ## Installation
 
@@ -86,3 +95,12 @@ else
 	warn("Failed to connect to websocket!")
 end
 ```
+
+## Self-hosting the server
+1. Download the entire RoSocket repository by clicking on **Code** > **Download ZIP**
+2. Extract the ZIP file, and cut the "server" folder. Paste the contents of the folder inside a directory of your choice/folder.
+3. Open a command bar with the location being inside the folder holding the contents, and run:
+```js
+npm install express ws
+```
+4. You're good to go! Optional is to change the default port.
