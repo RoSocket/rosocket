@@ -21,7 +21,6 @@ export type RequestResponse<T> = {
 	Headers: {[string?]: string},
 	Body: T
 }
-
 export type ConnectionData = {
 	UUID: string?,
 	Socket: string?,
@@ -49,33 +48,6 @@ function Reader:FormatText<T>(text: string?, ...: any?): string
 	
 	return tostring(`{Signature.Signature} {Signature.Splitter} {text}`)
 end
-function Reader:ValidateID<T>(id: string?, ...: any?): boolean
-	assert(id, Errors.EMPTY_ID_TO_VALIDATE)
-	assert(typeof(id) == "string", string.format(Errors.INVALID_ARGUMENT_TYPE, "id", "string", typeof(id)))
-	
-	local Response : RequestResponse = HttpService:RequestAsync({
-		Url = `{SOCKET_SERVER_URL}{Dictionary.Validation}`,
-		Method = "POST",
-		Headers = {
-			["Content-Type"] = "application/json",
-		},
-		Body = HttpService:JSONEncode({UUID = tostring(id)})
-	})
-
-	if Response.Success == true then
-		local DecodedSuccess, DecodedResult = pcall(function() 
-			return HttpService:JSONDecode(Response.Body)
-		end)
-
-		if DecodedSuccess == true then
-			return DecodedResult and true or false
-		elseif DecodedSuccess == false then
-			error(self:FormatText(`Failed to decode response | Error {tostring(DecodedResult)}`))
-		end
-	elseif Response.Success == false then
-		error(self:FormatText(`Failed to validate socket session id {tostring(id)} | Status Code {tostring(Response.StatusCode)}`))
-	end
-end
 function Reader:Connect<T>(socket: string?, ...: any?)
 	local ValidLink = self:ValidateWSSLink(tostring(socket))
 	if ValidLink == false then
@@ -92,7 +64,7 @@ function Reader:Connect<T>(socket: string?, ...: any?)
 
 	if Response.Success == true then
 		warn(self:FormatText(`Successfully connected!`))
-		local DecodedSuccess, DecodedResult = pcall(function() 
+		local DecodedSuccess, DecodedResult : ConnectionData = pcall(function() 
 			return HttpService:JSONDecode(Response.Body)
 		end)
 
@@ -106,10 +78,8 @@ function Reader:Connect<T>(socket: string?, ...: any?)
 	end
 end
 function Reader:Disconnect<T>(id: string?, ...: any?): boolean
-	local ValidID = self:ValidateID(id)
-	if ValidID == false then
-		return error(self:FormatText(`Invalid socket session id passed. You can grab the ID by accessing the read-only property called UUID.`))
-	end
+	local ValidID = true
+	
 	local Response : RequestResponse = HttpService:RequestAsync({
 		Url = `{SOCKET_SERVER_URL}{Dictionary.Disconnection}`,
 		Method = "POST",
@@ -120,7 +90,7 @@ function Reader:Disconnect<T>(id: string?, ...: any?): boolean
 	})
 	
 	if Response.Success == true then 
-		local DecodedSuccess, DecodedResult = pcall(function() 
+		local DecodedSuccess, DecodedResult : DisconnectionData = pcall(function() 
 			return HttpService:JSONDecode(Response.Body)
 		end)
 
