@@ -25,7 +25,7 @@ Wally:
 
 ```toml
 [dependencies]
-Socket = "RoSocket/rosocket@1.0.0"
+Socket = "RoSocket/rosocket@1.0.1"
 ```
 
 Roblox Model:
