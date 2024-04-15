@@ -87,15 +87,6 @@ app.post('/disconnect', (req, res) => {
     res.json({ UUID, success: true });
 });
 
-app.post('/validation', (req, res) => {
-    const { UUID } = req.body;
-    if (!UUID) {
-        return res.status(400).json({ success: false, error: "No UUID provided!" });
-    }
-
-    res.json({ isValid: !!connections[UUID] });
-});
-
 app.post('/send', (req, res) => {
     const { UUID, Message } = req.body;
     if (!UUID || !Message) {
