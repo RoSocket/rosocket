@@ -5,43 +5,44 @@
 	Backend uses the "ws" library aswell, providing proper socket support, and is coded in Node.
 	
 	• Creator: @binarychunk
+	
+		- CHANGELOG -
+	
+	v1.0.0:
+		Initial release
+	v1.0.1:
+		Improved code readability
+		Improved code speed by removing some useless portions
+		Made it send all variable arguments from inside the Send function to the Reader
+		Added more intelli sense stuff
+		Added custom error messages when trying to:
+		- send messages to a disconnected socket
+		- disconnect a already-disconnected socket
 ]]--
 
 local RoSocket = {}
------------------------------------------------
 local Reader = require(script.Reader)
 local Errors = require(script.Reader.Errors)
 local Signal = require(script.Signal)
 local Maid = require(script.Maid)
------------------------------------------------
+
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
------------------------------------------------
-local SOCKET_SERVER_UPDATES = 0.15 -- Decrease this decimal to achieve even faster speeds. Minimum is 0.02, anything below will temporarly ratelimit the current game server. I recommend it around 0.10-0.15!
------------------------------------------------
-export type RequestResponse<T> = {
-	Success: boolean?,
-	StatusCode: number?,
-	StatusMessage: string?,
-	Headers: {[string?]: string},
-	Body: T
-}
------------------------------------------------
--- Main checks for proper execution, such as context checks --
--- Context check
+
+local SOCKET_SERVER_UPDATES = 0.10
+
 if RunService:IsServer() == false then
 	error(Reader:FormatText(Errors.INVALID_REQUIREMENT_CONTEXT))
 end
--- Http check
 if not HttpService.HttpEnabled then
 	error(Reader:FormatText(Errors.HTTP_SERVICE_DISABLED))
 end
------------------------------------------------
+
 local MaidSocket = Maid.new()
 local Sockets = {}
-RoSocket.Version = "1.0.0"
+RoSocket.Version = "1.0.1"
 RoSocket.Connect = function(socket: string): (any?) -> (table)
 	local validsocket = true
 
@@ -57,7 +58,7 @@ RoSocket.Connect = function(socket: string): (any?) -> (table)
 			coroutine.resume(coroutine.create(function() 
 				while tbl do 
 					tbl.readyState = dis and "CLOSED" or "OPEN"
-					task.wait()
+					task.wait(0.05)
 				end
 			end))
 			tbl.binaryType = "buffer"
@@ -137,24 +138,30 @@ RoSocket.Connect = function(socket: string): (any?) -> (table)
 			tbl.UUID = uuid
 			tbl.Socket = data.Socket
 			tbl.Disconnect = function(...)
-				local success = Reader:Disconnect(uuid)
-				Sockets[uuid] = nil
-				MaidSocket[uuid] = nil
-				tbl.OnDisconnect:Fire()
-				dis = true
-				return true
+				if dis == true then
+					warn(Reader:FormatText("You cannot disconnect a disconnected socket!"))
+					return false
+				else
+					local success = Reader:Disconnect(uuid)
+					Sockets[uuid] = nil
+					MaidSocket[uuid] = nil
+					tbl.OnDisconnect:Fire()
+					dis = true
+					return true
+				end
+				
 			end
 			tbl.Send = function(...) 
 				if dis == false then
-					local success = Reader:Send(uuid, select(1, ...))
+					local success = Reader:Send(uuid, ...)
 					return success
 				else
 					warn(Reader:FormatText("You cannot send messages to a disconnected socket!"))
 					return false
 				end
 			end
-			tbl.Messages = localmsgs and localmsgs or {}
-			tbl.Errors = localerrors and localerrors or {}
+			tbl.Messages = localmsgs or {}
+			tbl.Errors = localerrors or {}
 
 			setmetatable(tbl, {
 				__call = function(self, index, ...) 
