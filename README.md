@@ -6,7 +6,13 @@
   To enable them, head over to the topbar > <b>FILE</b> > <b>Game Settings</b> > <b>Security</b> > <b>Allow HTTP Requests</b>.<br>
   If you are self-hosting, then navigate to the <b>"Reader"</b> module and change "SOCKET_SERVER_URL" to the URL of your server.
 </p>
-<br>
+
+<p align="center">
+  <img src="https://img.shields.io/github/license/rosocket/rosocket" alt="GitHub License">
+</p>
+
+---
+
 <p align="center">
   <a href="#api">API documentation</a> •
   <a href="#simple-example">Examples</a> •
