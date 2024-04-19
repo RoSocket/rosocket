@@ -1,7 +1,7 @@
 [package]
 name = "RoSocket/rosocket"
 description = "Roblox websocket support in 1 module"
-version = "1.0.0"
+version = "1.0.1"
 license = "MIT"
 authors = ["sturmgeisty"]
 registry = "https://github.com/upliftgames/wally-index"
