@@ -43,6 +43,12 @@ If you want faster replies, then navigate to the **reader module** > **SOCKET_SE
 function RoSocket.Connect(socket: string): (any?) -> (table)
 ```
 
+**Keys:**
+
+```Lua
+string RoSocket.Version
+```
+
 **Socket:**
 ```Lua
 function socket.Disconnect(...: any): (boolean) -> (boolean)
@@ -56,12 +62,6 @@ string socket.binaryType -- buffer (doesn't modify way of requests)
 string socket.readyState -- OPEN/CLOSED
 object socket.Messages
 object socket.Errors
-```
-
-**Keys:**
-
-```Lua
-string RoSocket.Version: string?
 ```
 
 ## Simple Example
