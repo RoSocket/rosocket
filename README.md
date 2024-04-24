@@ -9,6 +9,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/license/rosocket/rosocket" alt="GitHub License">
+  <img src="https://img.shields.io/github/downloads/RoSocket/rosocket/total" alt="GitHub Downloads">
 </p>
 
 ---
