@@ -1,5 +1,7 @@
 <p align="center">
-  <img width="600" src="https://github.com/RoSocket/rosocket/assets/130825965/f795c24e-dcf0-4fe3-b482-98fe7809e923">
+  <a href="https://github.com/RoSocket/rosocket">
+  	<img width="600" src="https://github.com/RoSocket/rosocket/assets/130825965/f795c24e-dcf0-4fe3-b482-98fe7809e923">
+  </a>
   <br>
   <code>RoSocket</code> is a Roblox module to emulate a websocket library.<br>
   Http requests must be enabled for the module to work.<br>
