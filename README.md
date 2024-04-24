@@ -106,8 +106,10 @@ end
 ## Self-hosting the server
 1. Download the entire RoSocket repository by clicking on **Code** > **Download ZIP**
 2. Extract the ZIP file, and cut the "server" folder. Paste the contents of the folder inside a directory of your choice/folder.
-3. Open a command bar with the location being inside the folder holding the contents, and run:
-```js
+3. Open a shell and run:
+```npm
 npm install express ws
 ```
-4. You're good to go! Optional is to change the default port.
+4. You're good to go! Optional is to change the default port & default host.<br>
+
+[(Back to top)](#installation)
