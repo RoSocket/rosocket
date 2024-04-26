@@ -31,23 +31,24 @@ export type DisconnectionData = {
 	Socket: string?
 }
 -----------------------------------------------
-local SOCKET_SERVER_URL = "http://66.94.113.204:6214" --You can change this if you self host
+local SOCKET_SERVER_URL = "" --You can change this if you self host
 -----------------------------------------------
 local WSS_PATTERN = "^wss://[%w%.]"
 -----------------------------------------------
-
-function Reader:ValidateWSSLink<T>(link: string?, ...: any?): boolean
-	assert(link, Errors.EMPTY_WSS_LINK_TO_VALIDATE)
-	assert(typeof(link) == "string", string.format(Errors.INVALID_ARGUMENT_TYPE, "link", "string", typeof(link)))
-	
-	return string.match(link, WSS_PATTERN) and true or false
-end
 function Reader:FormatText<T>(text: string?, ...: any?): string
 	assert(text, Errors.EMPTY_TEXT_TO_FORMAT)
 	assert(typeof(text) == "string", string.format(Errors.INVALID_ARGUMENT_TYPE, "text", "string", typeof(text)))
 	
 	return tostring(`{Signature.Signature} {Signature.Splitter} {text}`)
 end
+assert(SOCKET_SERVER_URL ~= "", Reader:FormatText("Invalid backend URL. You can use heroku or replit to deploy the node backend!"))
+function Reader:ValidateWSSLink<T>(link: string?, ...: any?): boolean
+	assert(link, Errors.EMPTY_WSS_LINK_TO_VALIDATE)
+	assert(typeof(link) == "string", string.format(Errors.INVALID_ARGUMENT_TYPE, "link", "string", typeof(link)))
+	
+	return string.match(link, WSS_PATTERN) and true or false
+end
+
 function Reader:Connect<T>(socket: string?, ...: any?)
 	local ValidLink = self:ValidateWSSLink(tostring(socket))
 	if ValidLink == false then
@@ -177,4 +178,3 @@ function Reader:GetErrors<T>(id: string?, ...): any
 end
 
 return Reader
--- P.S: this module was forgotten and I had started it almost 5 months ago from today - 13th of April 2024, and I made it work in 1 day :)
