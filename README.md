@@ -2,11 +2,6 @@
   <a href="https://github.com/RoSocket/rosocket">
   	<img width="600" src="https://github.com/RoSocket/rosocket/assets/130825965/f795c24e-dcf0-4fe3-b482-98fe7809e923">
   </a>
-  <br>
-  <code>RoSocket</code> is a Roblox module to emulate a websocket library.<br>
-  Http requests must be enabled for the module to work.<br>
-  To enable them, head over to the topbar > <b>FILE</b> > <b>Game Settings</b> > <b>Security</b> > <b>Allow HTTP Requests</b>.<br>
-  If you are self-hosting, then navigate to the <b>"Reader"</b> module and change "SOCKET_SERVER_URL" to the URL of your server.
 </p>
 
 <p align="center">
@@ -38,6 +33,7 @@ Download from [Releases](https://github.com/RoSocket/rosocket/releases)
 
 ## API
 
+For RoSocket to work correctly, you must enable in-game HTTP requests & self-host the server!
 If you want faster replies, then navigate to the **reader module** > **SOCKET_SERVER_UPDATES**, set it to 0.10 or less, minimum is 0.02 before ratelimits start to appear.
 
 **Functions:**
